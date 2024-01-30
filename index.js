@@ -7,7 +7,7 @@ mongo.connect('mongodb+srv://shreesanjai:Shreesanr34@cluster0.mcujdbo.mongodb.ne
 
 app.use(express.json())
 
-app.post('/expense',async(req,res)=>{
+app.get('/expense',async(req,res)=>{
     try{
         const expense = await Expense.find();
         res.send(expense);    
@@ -67,19 +67,7 @@ app.post('/add/expense',async(req,res)=>{
     }
 })
   
-app.post('/add/expense',async(req,res)=>{
-    try{
-        console.log(req.body);
-        const newEx=req.body;
-        await Expense.create(newEx);
-        res.send(`{"Message" : "New Instance Created"}`); 
-    }
-    catch(err)
-    {
-        res.send(`{"Message" : "Error Occured Instance not Added."}`); 
-        
-    }
-})
+
 
 app.put('/expense/update/:id',async(req,res)=>{
     try{
