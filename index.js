@@ -3,9 +3,26 @@ const app = express();
 const mongo=require('mongoose')
 const port = process.env.PORT || 8000
 const Expense = require('./models/Expense');
+const cors = require('cors');
+
+
 mongo.connect('mongodb+srv://shreesanjai:Shreesanr34@cluster0.mcujdbo.mongodb.net/expense-tracker?retryWrites=true&w=majority')
 
 app.use(express.json())
+
+const corsOptions = {
+    origin: 'https://e-commerce-material-ui.vercel.app',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions))
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
 
 app.get('/expense',async(req,res)=>{
     try{
