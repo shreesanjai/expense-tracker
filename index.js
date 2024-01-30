@@ -1,7 +1,7 @@
 const express =require('express');
 const app = express();
 const mongo=require('mongoose')
-const port =3005
+const port = process.env.PORT || 8000
 const Expense = require('./models/Expense');
 mongo.connect('mongodb+srv://shreesanjai:Shreesanr34@cluster0.mcujdbo.mongodb.net/expense-tracker?retryWrites=true&w=majority')
 
@@ -99,4 +99,4 @@ app.put('/expense/update/:id',async(req,res)=>{
     
 })
 
-app.listen(port,()=>console.log("Server running..."))
+app.listen(port,()=>console.log(`Server running in ${port}`))
